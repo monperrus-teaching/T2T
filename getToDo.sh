@@ -10,12 +10,16 @@ rm toDo2Trello.t2t
 
 
 files=$(find $1 -name '*.java')
+regex='^public[[:space:]]+(class|interface)[[:space:]]+([aA-zZ])+[[:space:]]+{'
 IFS=$'\n'
 for file in $files
 do	
-	for line in $(grep "TODO" $file)
+	
+    classname=$(cat test.java | tr -s ' ' | grep -E '^public[[:space:]]+(class|interface)[[:space:]]+([aA-zZ])+[[:space:]]+{' | cut -d ' ' -f 3)
+	echo $classname
+	for line in $(grep "// TODO" $file)
 	do
-		echo $line | sed -e 's/^[ \t]*//' | sed -e 's/^[ 	]*//' >> toDo2Trello.t2t
+		echo `echo $line | sed -e 's/^[ \t]*//' | sed -e 's/^[ 	]*//'` $classname >> toDo2Trello.t2t
 	done
 done
 
