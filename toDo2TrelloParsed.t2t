@@ -1,10 +1,9 @@
-Yassine;doIt;10/02/2016;You
-Yassine;die;10/02/2016;Agent
-Ouamar;SMA;08/02/2016;SMA
-Ouamar;paint;10/02/2016;Panel
-Yassine;updatePos;10/02/2016;Predator
-Ouamar;init;10/02/2016;Predator
-Ouamar;isFree;10/02/2016;EnvironnementHunter
-Ouamar;isFree;10/02/2016;EnvironnementHunter
-Yassine;isEmpty;10/02/2016;EnvironnementHunter
-Yassine;isOutOfBounds;10/02/2016;EnvironnementHunter
+Yassine Badache;Fixing doIt;02/10/2016;You;doIt()
+Yassine Badache;Refactor die;02/10/2016;Agent;die()
+Ouamar Sais;Simplify constructor;02/08/2016;SMA;SMA()
+Ouamar Sais;Make it more beautiful;02/10/2016;Panel;paint()
+Yassine Badache;Should work for every Agent;02/10/2016;Predator;updatePos()
+Ouamar Sais;Fix this;02/10/2016;Predator;init()
+Ouamar Sais;Should work for every Environnement;02/08/2016;EnvironnementHunter;isFree()
+Yassine Badache;Should work for every Environnement;02/08/2016;EnvironnementHunter;isEmpty()
+Yassine Badache;Should work for every Environnement;10/02/2016;EnvironnementHunter;isOutOfBounds()
