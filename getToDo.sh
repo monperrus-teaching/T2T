@@ -6,9 +6,6 @@ if [[ $# -ne 1 ]]; then
     exit 1 # terminate and indicate error
 fi
 
-rm toDo2Trello.t2t
-
-
 files=$(find $1 -name '*.java')
 #regex='^public[[:space:]]+(abstract[[:space:]]+)?(enum|class|interface)[[:space:]]+[aA-zZ]+[[:space:]]*(extends[[:space:]]+[aA-zZ]+[[:space:]]*)?(implements[[:space:]]+[aA-zZ]+[[:space:]]*)?{'
 regex='(public|private|protected)[[:space:]]+(void|[aA-zZ]+)[[:space:]]+[[:alnum:]]+[[:space:]]*\('
@@ -28,7 +25,5 @@ do
 		fi
 	done
 done
-
-cat toDo2Trello.t2t
 
 	

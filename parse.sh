@@ -1,7 +1,9 @@
 #!/bin/bash
 IFS=$'\n'
 
-for line in $(cat $1)
+mv toDo2TrelloParsed.t2t toDo2TrelloParsedOld.t2t 2> /dev/null
+
+for line in $(cat toDo2Trello.t2t 2> /dev/null)
 do
 	name="$(echo $line | cut -d " " -f 4) $(echo $line | cut -d " " -f 5)"
 	task=$(echo $line | cut -d "\"" -f 2)
@@ -13,4 +15,6 @@ do
 	echo $name has to $task \for $date into $classname $method
 done
 
-rm $1
+diff -b toDo2TrelloParsed.t2t toDo2TrelloParsedOld.t2t 2> /dev/null | grep '^>' | cut -d '>' -f 2  | sed -e 's/^[[:space:]]*//' > done.t2t
+
+rm toDo2Trello.t2t 2> /dev/null

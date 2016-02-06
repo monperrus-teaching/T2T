@@ -5,7 +5,9 @@ Yassine Badache;Gérer l'exception, trouver le NPE bug;08/02/2016;Predator;doIt
 Yassine Badache;méthode die();10/02/2016;You;die
 Yassine Badache;Gérer l'exception;10/02/2016;SMAPredator;run
 Ouamar Sais;Ajuster vitesse des prédateurs;10/02/2016;SMAPredator;SMAPredator
+Ouamar Sais;Factorisation avec SMA;10/02/2016;SMAPredator;SMAPredator
 Ouamar Sais;Gerer isFree() pour wator;10/02/2016;Environnement;isFree
 Yassine Badache;Afficher error file;10/02/2016;MainPredator;MainPredator
+Yassine Badache;Afficher readme;10/02/2016;MainPredator;MainPredator
 Yassine Badache;Afficher error file;10/02/2016;MainWator;MainWator
 Yassine Badache;Afficher readme;10/02/2016;MainWator;MainWator
