@@ -1,9 +1,14 @@
-Yassine Badache;Fixing doIt;02/10/2016;You;doIt()
-Yassine Badache;Refactor die;02/10/2016;Agent;die()
-Ouamar Sais;Simplify constructor;02/08/2016;SMA;SMA()
-Ouamar Sais;Make it more beautiful;02/10/2016;Panel;paint()
-Yassine Badache;Should work for every Agent;02/10/2016;Predator;updatePos()
-Ouamar Sais;Fix this;02/10/2016;Predator;init()
-Ouamar Sais;Should work for every Environnement;02/08/2016;EnvironnementHunter;isFree()
-Yassine Badache;Should work for every Environnement;02/08/2016;EnvironnementHunter;isEmpty()
-Yassine Badache;Should work for every Environnement;10/02/2016;EnvironnementHunter;isOutOfBounds()
+Ouamar;Meilleure factorisation pour agent;08/02/2016;Bille;Bille
+Yassine;Gérer override;08/02/2016;Fish;updatePosition
+Ouamar;clear() / isEmpty() fix;08;Predator;updatePosition
+Yassine;Gérer l'exception, trouver le NPE bug;08/02/2016;Predator;doIt
+Yassine;méthode die();10/02/2016;You;die
+Yassine;Gérer l'exception;10/02/2016;SMAPredator;run
+Ouamar;Ajuster vitesse des prédateurs;10/02/2016;SMAPredator;SMAPredator
+Ouamar;Factorisation avec SMA;10/02/2016;SMAPredator;SMAPredator
+Ouamar;Gerer isFree() pour wator;10/02/2016;Environnement;isFree
+Yassine;Afficher error file;10/02/2016;MainPredator;MainPredator
+Yassine;Afficher readme;10/02/2016;MainPredator;MainPredator
+Yassine;Afficher error file;10/02/2016;MainWator;MainWator
+Yassine;Afficher readme;10/02/2016;MainWator;MainWator
+Both;Interface programmable sans arg. commande;10/02/2016;View;View
