@@ -41,6 +41,8 @@ public class T2T {
 	}
 
 	private static void process() {
+		Map<String, String> listKeyValueMap = new HashMap<String, String>();
+
 		try {
 			for (String line : Files.readAllLines(Paths.get("toDo2TrelloNewTasks.t2t"))) {
 				// name (0), task desc. (1), date (2), class (3), method (4)
