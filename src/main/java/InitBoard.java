@@ -7,9 +7,8 @@ import java.util.Map;
 import org.trello4j.TrelloImpl;
 import org.trello4j.model.Member;
 
+public class InitBoard {
 
-
-public class MainClass {
 	final static String API_KEY = "1ae06ad5bee3715dbcfabb71342c54ed";
 
 	final static String BOARD_KEY = "56af6582ccde1bf9a1bfd85a";
@@ -17,17 +16,22 @@ public class MainClass {
 	final static String API_TOKEN = "ed4b95898da90220abc1c6e86e29e7b3d6b8a22bf5c759954a7cad3d678b5bfb";
 
 	public static void main(String[] args) throws IOException {
-		int i = 0;
+		initBoard();
+	}
+
+	public static void initBoard() throws IOException {
+		System.out.println();
 		Map<String, String> listKeyValueMap = new HashMap<String, String>();
 
 		TrelloImpl trello = new TrelloImpl(API_KEY, API_TOKEN);
 
 		// Creating the list, on top of the Trello board
 		listKeyValueMap.put("pos", "top");
-		org.trello4j.model.List todolist = trello.createList(BOARD_KEY, "TODO List", listKeyValueMap);
+		org.trello4j.model.List todolist = trello.createList(BOARD_KEY, "TODO", listKeyValueMap);
+		listKeyValueMap.put("pos", "bottom");
+		org.trello4j.model.List donelist = trello.createList(BOARD_KEY, "DONE", listKeyValueMap);
 
 		for (String line : Files.readAllLines(Paths.get("toDo2TrelloParsed.t2t"))) {
-			i++;
 			// name (0), task desc. (1), date (2), class (3), method (4)
 			String[] parts = line.split(";");
 
@@ -39,6 +43,5 @@ public class MainClass {
 
 			trello.createCard(todolist.getId(), parts[3] + ":" + parts[4], cardKeyValueMap);
 		}
-
 	}
 }
