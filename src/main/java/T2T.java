@@ -12,26 +12,64 @@ public class T2T {
 
 	final static String API_KEY = "1ae06ad5bee3715dbcfabb71342c54ed";
 
-	final static String BOARD_KEY = "56af6582ccde1bf9a1bfd85a";
+	static String BOARD_KEY;
 
-	final static String API_TOKEN = "ed4b95898da90220abc1c6e86e29e7b3d6b8a22bf5c759954a7cad3d678b5bfb";
+	static String USER_TOKEN;
 
-	final static TrelloImpl trello = new TrelloImpl(API_KEY, API_TOKEN);
+	static TrelloImpl trello;
+
+	static org.trello4j.model.List todolist;
+	static org.trello4j.model.List donelist;
 
 	public static void main(String[] args) {
+		if (args.length != 2) {
+			System.err.println("Mauvais usage, vous devez fournir un token utilisateur (1)\n et l'ID du board\n Token user (2):\n\n"
+					+ "https://trello.com/1/authorize?key=1ae06ad5bee3715dbcfabb71342c54ed&name=T2T&expiration=never&response_type=token&scope=read,write");
+			System.exit(1);
+		}
+		USER_TOKEN = args[0];
+		BOARD_KEY = args[1];
+
+		trello = new TrelloImpl(API_KEY, USER_TOKEN);
+
 		try {
-			initBoard();
+			init();
+			process();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 
-	public static void initBoard() throws IOException {
-		System.out.println();
-		Map<String, String> listKeyValueMap = new HashMap<String, String>();
+	private static void process() {
+		try {
+			for (String line : Files.readAllLines(Paths.get("toDo2TrelloNewTasks.t2t"))) {
+				// name (0), task desc. (1), date (2), class (3), method (4)
+				String[] parts = line.split(";");
 
-		org.trello4j.model.List todolist;
-		org.trello4j.model.List donelist;
+				Map<String, String> cardKeyValueMap = new HashMap<String, String>();
+				cardKeyValueMap.put("due", "Due " + parts[2]);
+				cardKeyValueMap.put("desc", parts[1]);
+				Member dev = trello.getMember(parts[0].toLowerCase().replaceAll("\\s+", ""), (String[]) null);
+				cardKeyValueMap.put("idMembers", dev.getId());
+
+				trello.createCard(todolist.getId(), parts[3] + ":" + parts[4], cardKeyValueMap);
+			}
+
+			for (String line : Files.readAllLines(Paths.get("toDo2TrelloDone.t2t"))) {
+				// name (0), task desc. (1), date (2), class (3), method (4)
+				String[] parts = line.split(";");
+
+				Card formerCard = getCardByNameInList(parts[3] + ":" + parts[4], todolist.getId());
+
+				formerCard = trello.updateCard(formerCard.getId(), donelist.getId(), null);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public static void init() throws IOException {
+		Map<String, String> listKeyValueMap = new HashMap<String, String>();
 
 		if (getTODOList() == null) {
 			listKeyValueMap.put("pos", "top");
@@ -45,27 +83,6 @@ public class T2T {
 		} else
 			donelist = getDONEList();
 
-		for (String line : Files.readAllLines(Paths.get("toDo2TrelloNewTasks.t2t"))) {
-			// name (0), task desc. (1), date (2), class (3), method (4)
-			String[] parts = line.split(";");
-
-			Map<String, String> cardKeyValueMap = new HashMap<String, String>();
-			cardKeyValueMap.put("due", "Due " + parts[2]);
-			cardKeyValueMap.put("desc", parts[1]);
-			Member dev = trello.getMember(parts[0].toLowerCase().replaceAll("\\s+", ""), (String[]) null);
-			cardKeyValueMap.put("idMembers", dev.getId());
-
-			trello.createCard(todolist.getId(), parts[3] + ":" + parts[4], cardKeyValueMap);
-		}
-
-		for (String line : Files.readAllLines(Paths.get("toDo2TrelloDone.t2t"))) {
-			// name (0), task desc. (1), date (2), class (3), method (4)
-			String[] parts = line.split(";");
-
-			Card formerCard = getCardByNameInList(parts[3] + ":" + parts[4], todolist.getId());
-
-			formerCard = trello.updateCard(formerCard.getId(), donelist.getId(), listKeyValueMap);
-		}
 	}
 
 	private static org.trello4j.model.List getTODOList() {
