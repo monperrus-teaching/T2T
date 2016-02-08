@@ -1,6 +1,10 @@
 #!/bin/bash
 IFS=$'\n'
 
+if [ ! -f toDo2TrelloParsedOld.t2t ]; then
+	touch toDo2TrelloParsedOld.t2t
+fi
+
 mv toDo2TrelloParsed.t2t toDo2TrelloParsedOld.t2t 2> /dev/null
 
 for line in $(cat toDo2Trello.t2t 2> /dev/null)
@@ -16,5 +20,6 @@ do
 done
 
 diff -b toDo2TrelloParsed.t2t toDo2TrelloParsedOld.t2t 2> /dev/null | grep '^>' | cut -d '>' -f 2  | sed -e 's/^[[:space:]]*//' > done.t2t
+diff -b toDo2TrelloParsed.t2t toDo2TrelloParsedOld.t2t 2> /dev/null | grep '^<' | cut -d '<' -f 2  | sed -e 's/^[[:space:]]*//' > newtasks.t2t
 
 rm toDo2Trello.t2t 2> /dev/null
