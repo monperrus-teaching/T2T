@@ -18,8 +18,12 @@ public class T2T {
 
 	final static TrelloImpl trello = new TrelloImpl(API_KEY, API_TOKEN);
 
-	public static void main(String[] args) throws IOException {
-		initBoard();
+	public static void main(String[] args) {
+		try {
+			initBoard();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public static void initBoard() throws IOException {
